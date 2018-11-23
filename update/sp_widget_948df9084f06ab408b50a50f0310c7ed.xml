@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+	var c = this;		
+	c.display = function(){
+		c.data.message = (c.data.sometext) ? 'Hello ' + c.data.sometext + '!' : '';
+
+		for(var property in c.data){
+			console.log('c.data.' + property + ": " + c.data[property]);
+		}
+	}
+
+	c.display();
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>h1 {
+  color: #428bca;
+
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data>{
+//	"data": {
+		//"sometext": "mars"
+//	}
+}</demo_data>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>my_hello_world_2</id>
+        <internal>false</internal>
+        <link/>
+        <name>My Hello World 2</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+data.sometext = 'pluto';
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>A567624</sys_created_by>
+        <sys_created_on>2018-11-23 13:50:03</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>948df9084f06ab408b50a50f0310c7ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>My Hello World 2</sys_name>
+        <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
+        <sys_update_name>sp_widget_948df9084f06ab408b50a50f0310c7ed</sys_update_name>
+        <sys_updated_by>A567624</sys_updated_by>
+        <sys_updated_on>2018-11-23 13:50:03</sys_updated_on>
+        <template><![CDATA[<div>
+  Enter your name:
+  <input type="text" ng-model="c.data.sometext" ng-change="c.display()"/>
+  <h1>{{ c.data.message }}</h1><br />
+  "c.data.message" is set via the client script.
+</div>]]></template>
+    </sp_widget>
+</record_update>

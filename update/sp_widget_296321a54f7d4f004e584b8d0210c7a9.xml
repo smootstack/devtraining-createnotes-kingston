@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
+        <category/>
         <client_script><![CDATA[function($rootScope,$scope) {
 	/* widget controller */
 	var c = this;
@@ -15,8 +16,8 @@
 		$rootScope.noteID = id;
 		$rootScope.$emit('selectNote', id);
 	}
-  // Subscribe to event.  Set the new title and note values on the 
-	// c.data object
+	
+  // Subscribe to event.  Set the new title and note values on the c.data object
 	$rootScope.$on('updateTitle', function(event,data) { 
 		console.log("updateTitle event received: " + event);
 		console.log(data);
@@ -42,7 +43,7 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
-	
+	//This is like onLoad since we don't specify when this happens
 	data.notes = [];
 	var noteGR = new GlideRecord('x_snc_createnotes_note');
 	noteGR.addQuery('user', gs.getUser().getID());
@@ -50,11 +51,13 @@
 	noteGR.query();
 	while (noteGR.next()) {
 		var noteObj = {};
-		
+		//This grabs the values for those fields and puts it in the object
 		$sp.getRecordDisplayValues(noteObj, noteGR, 'number,title,sys_id');
 		
 		noteObj.note = noteGR.getValue('note').slice(0,20);
 		
+		//Put the object in the array for c.data
+		//
 		data.notes.push(noteObj);
 	}
 })();]]></script>
@@ -62,15 +65,17 @@
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2017-10-14 01:08:53</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
         <sys_id>296321a54f7d4f004e584b8d0210c7a9</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>Notes List</sys_name>
         <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
         <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
         <sys_update_name>sp_widget_296321a54f7d4f004e584b8d0210c7a9</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-11-15 18:15:41</sys_updated_on>
+        <sys_updated_by>A567624</sys_updated_by>
+        <sys_updated_on>2018-11-26 13:15:05</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
